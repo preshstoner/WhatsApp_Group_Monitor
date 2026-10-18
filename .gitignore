@@ -1,0 +1,4 @@
+#Ignore the local Anthropic API key file
+anthropic_key.txt
+__pycache__/
+.env

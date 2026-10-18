@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="refresh" content="12">
+    <title>WhatsApp QR Code</title>
+</head>
+<body style="display:flex; flex-direction:column; justify-content:center; align-items:center; height:100vh; font-family:sans-serif;">
+    <h2>Scan with WhatsApp (Auto-refreshes every 12s)</h2>
+    <div id="qr-container">Loading...</div>
+    <script>
+        fetch('http://localhost:8080/instance/connect/monitor-instance', {
+            headers: { 'apikey': 'NBASUPERSECRETKEY' }
+        })
+        .then(res => res.json())
+        .then(data => {
+            const src = data.base64 || (data.qrcode ? data.qrcode.base64 : '');
+            if (src) {
+                document.getElementById('qr-container').innerHTML = '<img src="' + src + '" style="width:350px;height:350px;" />';
+            } else {
+                document.getElementById('qr-container').innerHTML = '<h3>Already Connected or Loading...</h3>';
+            }
+        })
+        .catch(err => {
+            document.getElementById('qr-container').innerHTML = 'Error loading QR code';
+        });
+    </script>
+</body>
+</html>

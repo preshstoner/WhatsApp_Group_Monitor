@@ -1,0 +1,5 @@
+scrape_config:
+  - job_name: 'wa-monitor'
+    scrape_interval: 30s
+    static_configs:
+      - targets: ['172.18.0.1:8000'] # Or your FastAPI host/port container bridge
